@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeafLens AI</title>
+
+    <link rel="stylesheet" href="detector.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="sidebar.css">
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body> 
+    <div class="main-container">
+        <nav class="site-nav">
+            <button class="sidebar-toggle">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+        </nav>
+        <aside class="sidebar collapsed">
+            <button class="sidebar-toggle">
+                <span class="material-symbols-rounded">chevron_left</span>
+            </button>
+            <!--sidebar header-->
+            <header class='sidebar-header'>
+                <div class="logo-container">
+                    <img src="logo.png" alt="Logo" class="logo">
+                    <span class="logo-text">LeafLens AI</span>
+                </div>
+        
+        
+            </header>
+            <div class="sidebar-content">
+                <!-- menu list -->
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class="menu-link" href="dashboard.html">
+                            <span class="material-symbols-rounded">Dashboard</span>
+                            <span class="menu-label">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link active" href="index.html">
+                            <span class="material-symbols-rounded">Troubleshoot</span>
+                            <span class="menu-label">Disease Detector</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <span class="material-symbols-rounded">Settings</span>
+                            <span class="menu-label">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- sidebar footer -->
+            <div class="sidebar-footer">
+                <button class="theme-toggle">
+                    <div class="theme-label">
+                        <span class=" theme-icon material-symbols-rounded">dark_mode</span>
+                        <span class="theme-text">Dark Mode</span>
+                    </div>
+                    <div class="theme-toggle-track">
+                        <div class="theme-toggle-indicator"> </div>
+                    </div>
+                </button>
+            </div>
+        </aside>
+        <div class="app-container">
+            
+            <!-- Detector Header -->
+            <header class="header">
+                <span class="material-symbols-rounded">Troubleshoot</span>
+                <h1>Disease Detector</h1>
+            </header>
+
+            <main class="main-layout">
+                <!-- LEFT PANEL (60%) -->
+                <section class="left-panel">
+                    <div class="card interaction-panel">
+                        <div class="tabs">
+                            <button class="tab-btn active" onclick="switchTab('upload')">Upload Image</button>
+                            <button class="tab-btn" onclick="switchTab('camera')">Live Camera</button>
+                            
+                        </div>
+
+                        <div id="upload-section"  class="tab-content active" >
+                            <div class="upload-area"  id="drop-zone" >
+                                <input type="file" id="file-input" hidden accept="image/*">
+                                <div class="upload-placeholder">
+                                    <span class=" theme-icon material-symbols-rounded">Photo_Camera</span>
+                                    <p>Drag & Drop your plant leaf image here</p>
+                                    <button class="btn btn-secondary" onclick="document.getElementById('file-input').click()">Pick from Files</button>
+                                </div>
+                                <div id="preview-container" class="preview-container hidden">
+                                    <img id="image-preview" src="" alt="Preview">
+                                    <button class="btn btn-primary" id="predict-btn">Analyze Image</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="camera-section"  class="tab-content">
+                            <div class="camera-area" >
+                                <video id="camera-feed" autoplay playsinline></video>
+                                <canvas id="camera-canvas" hidden></canvas>
+                                <div class="camera-controls">
+                                    <button class="btn btn-secondary" onclick="captureImage()">Capture & Detect</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="loading" class="loading hidden">
+                            <div class="spinner"></div>
+                            <p>Processing with AI Neural Engine...</p>
+                        </div>
+
+                        <div id="ai-advisory" class="advisory-section hidden">
+                            <h3>Report</h3>
+                            <div id="advisory-content" class="markdown-content">
+                                <!-- Gemini output goes here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card visualization-panel">
+                        <h3>Confidence Scores</h3>
+                        <div class="chart-container">
+                            <canvas id="prediction-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                </section>
+
+                <!-- RIGHT PANEL (40%) -->
+                <section class="right-panel">
+                    
+
+                    <div class="card sample-section">
+                        <h3>Reference Samples</h3>
+                        <div id="sample-images" class="sample-grid">
+                            <p class="empty-state">Upload an image to see reference samples</p>
+                        </div>
+                    </div>
+
+                    <div class="card model-info-section">
+                        <h3>What diseases model can detect currently</h3>
+                        <ul>
+                            <li>Healthy Potato Plant</li>
+                            <li>Healthy Tomato Plant</li>
+                            <li>Late Blight(Potato)</li>
+                            <li>Leaf Blight(Corn)</li>
+                            <li>Leaf Mold(Tomato)</li>
+                            <li>Leaf Rust(Corn)</li>
+                        </ul>                       
+                    </div>
+                    <div class="card history-panel" style="overflow-y: auto;">
+                        <div class="history-header">
+                            <h3>Detection History</h3>
+                            <button onclick="clearHistory()" id="clear-btn" class="btn btn-secondary">Clear Recent History</button>
+                        </div>
+                        
+                        <div id="history-list" class="history-list">
+                            <!-- History items go here -->
+                            <p class="empty-state">No recent detections</p>
+                        </div>
+                        
+                    </div>
+                </section>
+            </main>
+        </div>
+    
+
+        <!-- Modal for Sample Images -->
+        <div id="image-modal" class="modal hidden" onclick="closeModal()">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modal-img">
+        </div>
+    </div>
+    
+    <script src="detector.js"></script>
+    <script src="sidebar.js"></script>
+    <div class="footer">
+        <p>&copy; 2026 Hemsara.</p>
+    </div>
+</body>
+</html>

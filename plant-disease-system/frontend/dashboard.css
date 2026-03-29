@@ -1,0 +1,740 @@
+/* importing google fonts-poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,500&display=swap');
+
+:root {
+    --primary-dark: #05b353;
+    --primary-light: #05b353;
+    --accent: #2E7D32;
+    --bg-neutral: #ECECFD;
+    --card: #ffffff;
+    --text-main: #1F2936;
+    --text-muted: #798EAE;
+    --shadow: rgba(8, 8, 8, 0.05);
+    --border-radius: 10px;
+    --card-hover: #dbdbdb73;
+     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body.dark-theme {
+    /* Dark theme colors */
+     --text-main: #F1F5F9;
+    --text-muted: #A6B7D2;
+    --shadow: rgba(255, 255, 255, 0.747);
+    --card: #141a29;
+    --card-hover: #1d2538;
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+.main-container {
+    display: flex;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 1rem;
+    
+}
+.master-layout {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 20rem;
+
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .master-layout {
+        grid-template-columns: 1fr;
+        margin: auto;
+
+    }
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    flex-direction: column;/* Stacks everything vertically */
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 3rem;
+    margin-left: 1rem;
+}
+
+.header h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    background: linear-gradient(125deg, #159c37ff 1%, #2a5298 30%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+        
+}
+
+.header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.logout-btn:hover {
+    color: var(--primary-dark);
+    background: var(--card-hover);
+}
+
+.dashboard-title{
+    display: flex;
+    gap: 4px;
+}
+
+.weather-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+    
+}
+.weather-card {
+    width: 350px;
+    /* max-width: 500px; */
+    background: linear-gradient(135deg, #159c37ff 0%, #2a5298 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    justify-self: end;
+}
+
+.weather-save {
+    justify-self: end;
+    margin-top: 0px;
+}
+
+.weather-save button {
+    width: 100%;
+    max-width: 350px;
+    background: #0943c0ff;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.weather-save button:hover {
+    background: #073496;
+}
+
+.weather-card::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 400px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+
+.weather-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.temperature {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.location {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.condition {
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    margin-top: 5px;
+}
+
+.weather-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 50px;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.detail-label {
+    opacity: 0.7;
+    margin-bottom: 2px;
+}
+
+.forecast-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-day {
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.forecast-temp {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.weather-icon {
+    font-size: 3rem;
+}
+
+#login-prompt{
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    /* display: none; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2000;
+    backdrop-filter: blur(8px);
+}
+
+.login-card {
+    background: var(--card);
+    padding: 2.5rem;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    color: var(--text-main);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    
+}
+
+.login-card input {
+    color: var(--text-main);
+    background: var(--card-hover);
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    border: 2px solid var(--text-muted);
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.login-card button {
+    background: var(--primary-dark);
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.login-form{
+    text-align: left;
+
+}
+
+/* Location Prompt Overlay */
+#location-prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.prompt-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    color: black;
+}
+
+.prompt-card input {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.prompt-card button {
+    background: #13c93aff;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+}
+
+
+/* ========================================== */
+/* CHAT INTERFACE STYLES */
+/* ========================================== */
+
+
+.chat-section {
+    background: var(--card);
+    border-radius: 24px;
+    height: 550px;
+    width: auto;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+
+}
+
+.chat-header-actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    margin-bottom: 2rem;
+}
+
+.icon-btn {
+    background: transparent;
+    color: var(--text-main);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 1rem;
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    background: var(--card-hover);
+}
+
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Custom Scrollbar for Chat */
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-container::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 10px;
+}
+
+.welcome-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding: 2rem;
+    transition: opacity 0.3s ease;
+}
+
+.chat-icon-large {
+    font-size: 4rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.welcome-screen h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.welcome-screen p {
+    color: var(--text-muted);
+}
+
+
+/* Chat Bubbles */
+.message {
+    /* display: flex;
+    flex-direction: column; */
+    /* max-width: 50%; */
+    /* padding: 12px 18px; */
+    border-radius: 18px;
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.5;
+    word-wrap: break-word;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message b {
+    font-weight: 800 !important;
+    color: var(--text-main);
+    /* Using your variable for consistency */
+    display: inline;
+}
+
+.message i {
+    font-style: italic;
+    color: var(--text-main);
+    opacity: 0.9;
+}
+
+.message.user-message {
+    max-width: 80%;
+    width: fit-content;
+    margin: 0.5rem 1rem;
+    padding: 10px 16px;
+    align-self: flex-end;
+    background: var(--primary-dark);
+    color: var(--text-main);
+    border-radius: 18px 18px 4px 18px;
+    text-align: right;
+    box-shadow: 0 4px 12px rgba(5, 179, 83, 0.15);
+}
+
+.message.ai-message {
+    max-width: 80%;
+    width: fit-content;
+    margin: 0.5rem 1rem;
+    padding: 10px 16px;
+    align-self: flex-start;
+    background: var(--card-hover);
+    color: var(--text-main);
+    border-radius: 18px 18px 18px 4px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Chat Input Area */
+.chat-input-area {
+    padding: 1.2rem;
+    background: var(--card);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 10px;
+    background: var(--card-hover);
+    padding: 8px 8px 8px 18px;
+    border-radius: 30px;
+    align-items: center;
+}
+
+.input-wrapper input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 10px 0;
+    font-size: 1rem;
+    outline: none;
+    color: var(--text-main);
+}
+
+.send-btn {
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Chat Loading Animation */
+.chat-loading {
+    display: none;
+    max-width: 80%;
+    width: fit-content;
+    margin: 0.5rem 1rem;
+    padding: 10px 16px;
+    align-self: flex-start;
+    background: var(--card-hover);
+    color: var(--text-main);
+    border-radius: 18px 18px 18px 4px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 4px;
+    gap: 5px;
+}
+
+.chat-loading .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.chat-loading .dot:nth-child(1) { animation-delay: -0.32s; }
+.chat-loading .dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* History Section */
+.history-section {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    color: var(--text-main);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.clear-btn {
+    background: transparent;
+    color: var(--text-main);
+    border: none;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-btn:hover {
+    background: rgba(255, 77, 77, 0.1);
+    color: #ff4d4d;
+}
+
+.history-list {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.history-item {
+    margin-top: 1rem;
+    background: var(--card-hover);
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.history-item:hover {
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.history-item .history-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.no-history {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    .master-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .right-panel {
+        order: -1;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+        margin-left: 0.5rem;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .header h2 {
+        font-size: 1rem;
+    }
+
+    .weather-card {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .temperature {
+        font-size: 2.5rem;
+    }
+
+    .chat-section {
+        height: 480px;
+    }
+
+    .chat-container {
+        padding: 1rem;
+    }
+
+    .message {
+        max-width: 90%;
+        margin: 0.5rem;
+    }
+
+    .history-section {
+        padding: 1rem;
+    }
+
+    .history-list {
+        grid-template-columns: 1fr;
+    }
+
+    .login-card {
+        padding: 1.5rem;
+        margin: 10px;
+    }
+
+    .login-card h2 {
+        font-size: 1.5rem;
+    }
+}
+
+.footer{
+    position: relative;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    color: var(--text-main);
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 10px;
+    padding: 5px 10px;
+}
